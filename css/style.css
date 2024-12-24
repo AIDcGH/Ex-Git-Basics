@@ -15,7 +15,7 @@ body {
     height: 100px;
     
     border-radius: 50%;
-    transition: 1s;
+    transition: .1s;
     
     place-items: center;
     font-size: 22px;
@@ -32,4 +32,8 @@ body {
 
 .three {
     background-color: #a4d;
+}
+
+.four {
+    background-color: #d4a;
 }
