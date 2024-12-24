@@ -1,5 +1,18 @@
 'use strict'
 
+function onReset() {
+    const elBall1 = document.querySelector('.one')
+    const elBall2 = document.querySelector('.two')
+    
+    elBall1.style.width = elBall1.style.height =
+    elBall2.style.width = elBall2.style.height = 
+    elBall1.style.background = elBall2.style.background = ''
+
+    elBall1.innerText = elBall2.innerText = 100
+
+    document.querySelector('body').style.background = ''
+}
+
 function onBallClick(elBall, maxDiameter) {
     changeSizeRandom(elBall, maxDiameter)
     
