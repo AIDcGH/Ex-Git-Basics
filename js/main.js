@@ -12,16 +12,14 @@ function onBallClick(elBall, maxDiameter) {
 }
 
 function onBallSwap() {
-    var elBallOne = document.querySelector('.one')
-    var elBallTwo = document.querySelector('.two')
-    
-    var aux = elBallOne.style.background || '#4da'
-    elBallOne.style.background = elBallTwo.style.background || '#4ad'
-    elBallTwo.style.background = aux
+    var elBall1 = document.querySelector('.one')
+    var elBall2 = document.querySelector('.two')
 
-    aux = elBallOne.style.width || '100px'
-    elBallOne.style.width = elBallOne.style.height = elBallTwo.style.width || '100px'
-    elBallOne.innerText = parseInt(elBallTwo.style.width) || 100
-    elBallTwo.style.width = elBallTwo.style.height = aux
-    elBallTwo.innerText = parseInt(aux)
+    swapElStyle(elBall1, elBall2, 'background')
+    
+    swapElStyle(elBall1, elBall2, 'width')
+    swapElStyle(elBall1, elBall2, 'height')
+    
+    elBall1.innerText = parseInt(elBall1.style.width) 
+    elBall2.innerText = parseInt(elBall2.style.width)
 }

@@ -14,3 +14,11 @@ function getRandomColor() {
     }
     return color
 }
+
+function swapElStyle(el1, el2, property) {
+    const el1Prop = getComputedStyle(el1)[property]
+    const el2Prop = getComputedStyle(el2)[property]
+    
+    el1.style[property] = el2Prop
+    el2.style[property] = el1Prop
+}
