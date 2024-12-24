@@ -3,6 +3,8 @@
 var gStates
 var gStateIdx
 
+var gMoveCount
+
 var gTimeout
 var gInterval
 var gIntervalCount
@@ -25,6 +27,8 @@ function onReset() {
     gStates = []
     gStateIdx = -1
     addState(createBall(elBall1), createBall(elBall2), 'black')
+
+    gMoveCount = 0
 }
 
 function createBall(elBall) {
@@ -52,6 +56,8 @@ function onBallClick(elBall, maxDiameter) {
 
     if (elBall.classList.contains('.one')) addState(createBall(elBall))
     else addState(null, createBall(elBall))
+
+    updateMoveCount()
 }
 
 function changeSizeRandom(elBall, edgeCase, isReduce = false) {
@@ -77,6 +83,8 @@ function onBallSwap() {
     elBall2.innerText = parseInt(elBall2.style.width)
 
     addState(createBall(elBall1), createBall(elBall2))
+
+    updateMoveCount()
 }
 
 function onShrink() {
@@ -87,11 +95,15 @@ function onShrink() {
     changeSizeRandom(elBall2, 100, true)
     
     addState(createBall(elBall1), createBall(elBall2))
+
+    updateMoveCount()
 }
 
 function onRandomBackground() {
     const bgc = document.querySelector('body').style.background = getRandomColor()
     addState(null, null, bgc)
+
+    updateMoveCount()
 }
 
 function hoverTimer() {
@@ -141,4 +153,8 @@ function redo() {
     if (gStateIdx + 1 >= gStates.length) return
     gStateIdx++
     renderState(gStates[gStateIdx])
+}
+
+function updateMoveCount() {
+    document.querySelector('title').innerText = ++gMoveCount
 }
