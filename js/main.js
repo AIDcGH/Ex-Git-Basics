@@ -43,7 +43,6 @@ function addState(ball1 = null, ball2 = null, bgc = null) {
     gStateIdx++
 
     gStates.splice(gStateIdx, gStates.length - gStateIdx + 1, { ball1, ball2, bgc })
-    console.log(gStates, gStateIdx)
 }
 
 function onBallClick(elBall, maxDiameter) {
@@ -113,4 +112,33 @@ function activateBalls() {
 function cancelTimedEvents() {
     clearTimeout(gTimeout)
     clearInterval(gInterval)
+}
+
+function undo() {
+    if (!gStateIdx) return
+    gStateIdx--
+    renderState(gStates[gStateIdx])
+}
+
+function renderState(state) {
+
+    const elBall1 = document.querySelector('.one')
+    const elBall2 = document.querySelector('.two')
+
+    elBall1.style.width = elBall1.style.height = state.ball1.size
+    elBall2.style.width = elBall2.style.height = state.ball2.size
+
+    elBall1.innerText = parseInt(state.ball1.size)
+    elBall2.innerText = parseInt(state.ball2.size)
+
+    elBall1.style.background = state.ball1.color
+    elBall2.style.background = state.ball2.color
+
+    document.querySelector('body').style.background = state.bgc
+}
+
+function redo() {
+    if (gStateIdx + 1 >= gStates.length) return
+    gStateIdx++
+    renderState(gStates[gStateIdx])
 }
