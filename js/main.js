@@ -36,3 +36,7 @@ function onShrink() {
     changeSizeRandom(elBall1, 100, true)
     changeSizeRandom(elBall2, 100, true)
 }
+
+function onRandomBackground() {
+    document.querySelector('body').style.background = getRandomColor()
+}
