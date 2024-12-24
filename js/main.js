@@ -5,6 +5,7 @@ var gStateIdx
 
 var gMoveCount
 
+var gTimer
 var gTimeout
 var gInterval
 var gIntervalCount
@@ -12,6 +13,10 @@ var gIntervalCount
 function onReset() {
 
     cancelTimedEvents()
+    clearInterval(gTimer)
+
+    document.querySelector('.ms').innerText = '000'
+    document.querySelector('.s').innerText = '00'
 
     const elBall1 = document.querySelector('.one')
     const elBall2 = document.querySelector('.two')
@@ -90,10 +95,13 @@ function onBallSwap() {
 function onShrink() {
     const elBall1 = document.querySelector('.one')
     const elBall2 = document.querySelector('.two')
-    
+
+    if (getComputedStyle(elBall1)['width'] === '100px' &&
+        getComputedStyle(elBall2)['width'] === '100px') return
+
     changeSizeRandom(elBall1, 100, true)
     changeSizeRandom(elBall2, 100, true)
-    
+
     addState(createBall(elBall1), createBall(elBall2))
 
     updateMoveCount()
@@ -157,4 +165,14 @@ function redo() {
 
 function updateMoveCount() {
     document.querySelector('title').innerText = ++gMoveCount
+
+    if (gMoveCount !== 1) return
+    var startTime = new Date()
+    gTimer = setInterval(updateTimer, 67, startTime)
+}
+
+function updateTimer(startTime) {
+    startTime -= Date.now()
+    document.querySelector('.ms').innerText = String(-startTime % 1000).padStart(3, '0')
+    document.querySelector('.s').innerText = Math.floor(-startTime / 1000)
 }
