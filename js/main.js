@@ -22,8 +22,9 @@ function onReset() {
 
     document.querySelector('body').style.background = ''
 
-    gStates = [createState(createBall(elBall1), createBall(elBall2), 'black')]
+    gStates = []
     gStateIdx = -1
+    addState(createBall(elBall1), createBall(elBall2), 'black')
 }
 
 function createBall(elBall) {
@@ -34,14 +35,15 @@ function createBall(elBall) {
     return ball
 }
 
-function createState(ball1 = null, ball2 = null, bgc = null) {
+function addState(ball1 = null, ball2 = null, bgc = null) {
     if (!ball1) ball1 = gStates[gStateIdx].ball1
     if (!ball2) ball2 = gStates[gStateIdx].ball2
     if (!bgc) bgc = gStates[gStateIdx].bgc
 
     gStateIdx++
 
-    return { ball1, ball2, bgc }
+    gStates.splice(gStateIdx, gStates.length - gStateIdx + 1, { ball1, ball2, bgc })
+    console.log(gStates, gStateIdx)
 }
 
 function onBallClick(elBall, maxDiameter) {
@@ -49,8 +51,8 @@ function onBallClick(elBall, maxDiameter) {
 
     elBall.style.background = getRandomColor()
 
-    if (elBall.classList.contains('.one')) gStates.push(createState(createBall(elBall)))
-    else gStates.push(createState(null, createBall(elBall)))
+    if (elBall.classList.contains('.one')) addState(createBall(elBall))
+    else addState(null, createBall(elBall))
 }
 
 function changeSizeRandom(elBall, edgeCase, isReduce = false) {
@@ -75,7 +77,7 @@ function onBallSwap() {
     elBall1.innerText = parseInt(elBall1.style.width)
     elBall2.innerText = parseInt(elBall2.style.width)
 
-    gStates.push(createState(createBall(elBall1), createBall(elBall2)))
+    addState(createBall(elBall1), createBall(elBall2))
 }
 
 function onShrink() {
@@ -85,12 +87,12 @@ function onShrink() {
     changeSizeRandom(elBall1, 100, true)
     changeSizeRandom(elBall2, 100, true)
     
-    gStates.push(createState(createBall(elBall1), createBall(elBall2)))
+    addState(createBall(elBall1), createBall(elBall2))
 }
 
 function onRandomBackground() {
     const bgc = document.querySelector('body').style.background = getRandomColor()
-    gStates.push(createState(null, null, bgc))
+    addState(null, null, bgc)
 }
 
 function hoverTimer() {
