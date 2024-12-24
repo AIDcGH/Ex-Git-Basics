@@ -21,5 +21,8 @@ body {
     place-items: center;
     font-size: 22px;
     font-weight: bold;
+}
 
+.two {
+    background-color: #4ad;
 }
