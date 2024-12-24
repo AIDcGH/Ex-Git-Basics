@@ -16,8 +16,10 @@ body {
     
     border-radius: 50%;
     background-color: #4da;
+    transition: 1s;
     
     place-items: center;
     font-size: 22px;
     font-weight: bold;
+
 }
