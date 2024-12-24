@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Git Basics</title>
 </head>
+
 <body>
     <h1>The Ball Game</h1>
     <div class="ball one" onclick="onBallClick(this, 400)">100</div>
-    <div class="ball two" onclick="onBallClick(this, 222)">100</div>
+    <div class="ball two" onclick="onBallClick(this, 555)">100</div>
     <div class="ball three" onclick="onBallSwap()">Swap</div>
     <div class="ball four" onclick="onShrink()">Shrink</div>
     <div class="ball five" onclick="onRandomBackground()">Page Color</div>
-    <div class="ball six" onclick="onReset()">Reset</div>
+    <div class="ball six" onclick="onReset()" onmouseover="hoverTimer()" onmouseout="cancelTimedEvents()">Reset / Hover
+        to Run</div>
     <script src="js/main.js"></script>
     <script src="js/util.js"></script>
 </body>
+
 </html>
